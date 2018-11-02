@@ -1,16 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="200" prefWidth="320" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentaciónvending.FXMLVistaController">
+<AnchorPane id="AnchorPane" prefHeight="479.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentaciónvending.FXMLVistaController">
     <children>
-        <Button fx:id="button" layoutX="126" layoutY="90" onAction="#handleButtonAction" text="Click Me!" />
         <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
-      <Button layoutX="133.0" layoutY="125.0" mnemonicParsing="false" text="ptoooooo" />
-      <Button fx:id="ptooooo" layoutX="74.0" layoutY="33.0" mnemonicParsing="false" text="Button" />
+      <Text layoutX="22.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vending">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Text>
+      <Button fx:id="btnNuevaVenta" layoutX="472.0" layoutY="21.0" mnemonicParsing="false" text="Nueva Venta" />
+      <Text layoutX="42.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Fecha Hora Venta" />
+      <Label fx:id="lblFecha" layoutX="153.0" layoutY="62.0" text="Hay que colocar la hora acá" />
+      <Text layoutX="35.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seleccione Producto" />
+      <ComboBox fx:id="ListProductos" layoutX="153.0" layoutY="99.0" onAction="#configureComboProductos" prefHeight="25.0" prefWidth="108.0" promptText="Productos" />
+      <Text layoutX="283.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cantidad" />
+      <TextField layoutX="338.0" layoutY="99.0" prefHeight="25.0" prefWidth="40.0" />
+      <Button fx:id="btnAgregarLinea" layoutX="466.0" layoutY="99.0" mnemonicParsing="false" text="Agregar Linea" />
+      <Text layoutX="30.0" layoutY="155.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lineas de la Venta">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Text>
+      <TableView fx:id="tblLineasVenta" layoutX="30.0" layoutY="172.0" prefHeight="121.0" prefWidth="393.0">
+        <columns>
+          <TableColumn fx:id="colProducto" prefWidth="104.0" text="Producto" />
+          <TableColumn fx:id="colCantidad" prefWidth="75.0" text="Cantidad" />
+            <TableColumn fx:id="colPrecio" prefWidth="124.0" text="Precio Producto" />
+            <TableColumn fx:id="ColSubTotal" prefWidth="89.0" text="SubTotal" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnEliminarLinea" layoutX="466.0" layoutY="172.0" mnemonicParsing="false" text="Eliminar Linea" />
+      <Text layoutX="270.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total Venta" />
+      <Label layoutX="354.0" layoutY="302.0" prefHeight="17.0" prefWidth="69.0" text="colocar Total" />
+      <Button fx:id="btnMonedaMil" layoutX="30.0" layoutY="335.0" mnemonicParsing="false" text="Agregar Moneda $1000" />
+      <Button fx:id="btnMonedaQui" layoutX="181.0" layoutY="335.0" mnemonicParsing="false" text="Agregar Moneda $500" />
+      <Text layoutX="330.0" layoutY="352.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Saldo Monedas Ingresadas" />
+      <Label layoutX="484.0" layoutY="339.0" text="Colocar saldo" />
+      <Button fx:id="btnTerminarVenta" layoutX="30.0" layoutY="400.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="104.0" text="Terminar Venta" />
+      <Button fx:id="btnGenerarReporte" layoutX="30.0" layoutY="440.0" mnemonicParsing="false" text="Generar Reporte" />
+      <Text layoutX="155.0" layoutY="417.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vueltos" />
+      <Label layoutX="227.0" layoutY="404.0" text="Colocar vueltos" />
+      <Label fx:id="lblMostrar" layoutX="227.0" layoutY="139.0" text="." />
     </children>
 </AnchorPane>
