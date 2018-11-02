@@ -23,6 +23,8 @@ public class FXMLVistaController implements Initializable {
     private Label label;
     @FXML
     private Button button;
+    @FXML
+    private Button ptooooo;
     
     @FXML
     private void handleButtonAction(ActionEvent event) {
