@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,6 +20,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  *
@@ -50,6 +52,9 @@ public class FXMLVistaController implements Initializable {
     private ComboBox<String> ListProductos;
     
     private ObservableList<String> productos = FXCollections.observableArrayList();
+    
+    //para la tabla
+    private ObservableList<String> productosTabla = FXCollections.observableArrayList();
     @FXML
     private Label lblMostrar;
     @FXML
@@ -89,6 +94,23 @@ public class FXMLVistaController implements Initializable {
     @FXML
     public void configureComboProductos(){
         this.lblMostrar.setText(ListProductos.getValue());
+        
+        /*PropertyValueFactory<String, String> idProperty
+                = new PropertyValueFactory<String, String>("Producto");
+        ObservableValue<String> producto;
+        producto.
+        colProducto.setCellValueFactory(ListProductos.getValue());*/
+        this.productosTabla.add(ListProductos.getValue());
+        //colProducto.setCellValueFactory(
+        //new PropertyValueFactory<>("Produco"));
+        this.tblLineasVenta.setItems(productosTabla);
+        PropertyValueFactory<String, String> nombreProperty
+                = new PropertyValueFactory<String, String>("Producto");
+        colProducto.setCellValueFactory(nombreProperty);
+
+        /*PropertyValueFactory<Persona, Double> edadProperty
+                = new PropertyValueFactory<Persona, Double>("edad");
+        colEdad.setCellValueFactory(edadProperty);*/
     }
     
 }

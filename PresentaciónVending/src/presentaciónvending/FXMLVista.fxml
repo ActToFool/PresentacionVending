@@ -9,7 +9,6 @@
 
 <AnchorPane id="AnchorPane" prefHeight="479.0" prefWidth="575.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentaciónvending.FXMLVistaController">
     <children>
-        <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" />
       <Text layoutX="22.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vending">
          <font>
             <Font size="30.0" />
