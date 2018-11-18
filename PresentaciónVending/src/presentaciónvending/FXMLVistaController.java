@@ -5,6 +5,10 @@
  */
 package presentaciónvending;
 
+import entidades.Alimento;
+import entidades.Bebida;
+import entidades.Linea;
+import entidades.Producto;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,9 +32,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class FXMLVistaController implements Initializable {
     
-    private List<String> productoscreados = new ArrayList<>();
+    private List<Producto> productoscreados = new ArrayList<>();
     
-    @FXML
+    private facades.IVending facadeVending ;    
     private Label label;
     @FXML
     private Button btnNuevaVenta;
@@ -54,19 +58,23 @@ public class FXMLVistaController implements Initializable {
     private ObservableList<String> productos = FXCollections.observableArrayList();
     
     //para la tabla
-    private ObservableList<String> productosTabla = FXCollections.observableArrayList();
+    private ObservableList<Producto> productosTabla = FXCollections.observableArrayList();
     @FXML
     private Label lblMostrar;
     @FXML
-    private TableView<String> tblLineasVenta;
+    private TableView<Linea> tblLineasVenta;
     @FXML
-    private TableColumn<String, String> colProducto;
+    private TableColumn<Linea, Producto> colProducto;
     @FXML
-    private TableColumn<String, String> colCantidad;
+    private TableColumn<Linea, Integer> colCantidad;
+    //@FXML
+    //private TableColumn<Producto, String> colPrecio;
+    //@FXML
+    //private TableColumn<Producto, String> ColSubTotal;
     @FXML
-    private TableColumn<String, String> colPrecio;
+    private TableColumn<?, ?> colPrecio;
     @FXML
-    private TableColumn<String, String> ColSubTotal;
+    private TableColumn<?, ?> ColSubTotal;
     
     private void handleButtonAction(ActionEvent event) {
         System.out.println("You clicked me!");
@@ -76,17 +84,29 @@ public class FXMLVistaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
+        facadeVending = new facades.Vending();
+        facadeVending.nuevaVenta();
         llenarProductos();
-        configureComboProductos();
+        
+        
+        
+        /*productos.setAll();
+        ListProductos.setItems(productos);
+        configureComboProductos();*/
     }  
     
     private void llenarProductos(){
-        this.productoscreados.add("Gaseosa");
-        this.productoscreados.add("Hamburguesa");
-        this.productoscreados.add("Pizza");
-        this.productoscreados.add("Almuerzo");
+        this.productoscreados.add(new Alimento(10, 20, 1, "Perico", 100));
+        this.productoscreados.add(new Bebida(500, 6000, 2 ,"Guaro", 50));
+        //this.productoscreados.add("Pizza");
+        //this.productoscreados.add("Almuerzo");
         
-        productos.setAll(this.productoscreados);
+        for(Producto pr : productoscreados) {
+            productos.add(pr.getNombre());
+        }
+        
+        //productos.setAll(this.productoscreados);
         ListProductos.setItems(productos);
         
     }
@@ -99,7 +119,7 @@ public class FXMLVistaController implements Initializable {
                 = new PropertyValueFactory<String, String>("Producto");
         ObservableValue<String> producto;
         producto.
-        colProducto.setCellValueFactory(ListProductos.getValue());*/
+        colProducto.setCellValueFactory(ListProductos.getValue());
         this.productosTabla.add(ListProductos.getValue());
         //colProducto.setCellValueFactory(
         //new PropertyValueFactory<>("Produco"));
@@ -108,7 +128,7 @@ public class FXMLVistaController implements Initializable {
                 = new PropertyValueFactory<String, String>("Producto");
         colProducto.setCellValueFactory(nombreProperty);
 
-        /*PropertyValueFactory<Persona, Double> edadProperty
+        PropertyValueFactory<Persona, Double> edadProperty
                 = new PropertyValueFactory<Persona, Double>("edad");
         colEdad.setCellValueFactory(edadProperty);*/
     }
