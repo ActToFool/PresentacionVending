@@ -12,7 +12,24 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- *
+ final Label clock = new Label();
+final DateFormat format = DateFormat.getInstance();
+final Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1), 
+new EventHandler() 
+{
+@Override  
+    public void handle(ActionEvent event) 
+    {
+      final Calendar cal = Calendar.getInstance();
+      clock.setText(format.format(cal.getTime());
+    }
+});
+
+timeline.setCycleCount(Animation.INDEFINITE);
+timeline.play();
+ * 
+ * 
+ * 
  * @author Emanuel Álvarez
  */
 public class PresentaciónVending extends Application {
