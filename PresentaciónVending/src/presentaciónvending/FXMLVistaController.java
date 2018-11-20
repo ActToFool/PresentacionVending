@@ -10,9 +10,16 @@ import entidades.Bebida;
 import entidades.Linea;
 import entidades.Producto;
 import java.net.URL;
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,7 +31,10 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 
 /**
  *
@@ -72,9 +82,11 @@ public class FXMLVistaController implements Initializable {
     //@FXML
     //private TableColumn<Producto, String> ColSubTotal;
     @FXML
-    private TableColumn<?, ?> colPrecio;
+    private TableColumn<Linea, Double> colPrecio;
     @FXML
-    private TableColumn<?, ?> ColSubTotal;
+    private TableColumn<Linea, Double> ColSubTotal;
+    @FXML
+    private TextField CantProductos;
     
     private void handleButtonAction(ActionEvent event) {
         System.out.println("You clicked me!");
@@ -88,6 +100,12 @@ public class FXMLVistaController implements Initializable {
         facadeVending = new facades.Vending();
         facadeVending.nuevaVenta();
         llenarProductos();
+        LocalDateTime localDate = LocalDateTime.now();//For reference
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/LLLL/yyyy hh:mm a");
+        String formattedString = localDate.format(formatter);
+        this.lblFecha.setText(formattedString);
+        
+        
         
         
         
@@ -115,6 +133,7 @@ public class FXMLVistaController implements Initializable {
     public void configureComboProductos(){
         this.lblMostrar.setText(ListProductos.getValue());
         
+        
         /*PropertyValueFactory<String, String> idProperty
                 = new PropertyValueFactory<String, String>("Producto");
         ObservableValue<String> producto;
@@ -132,5 +151,25 @@ public class FXMLVistaController implements Initializable {
                 = new PropertyValueFactory<Persona, Double>("edad");
         colEdad.setCellValueFactory(edadProperty);*/
     }
+    
+    @FXML
+    private void configureTable(){
+        PropertyValueFactory<Linea, Producto> productoProperty
+                = new PropertyValueFactory<Linea, Producto>("producto");
+        colProducto.setCellValueFactory(productoProperty);
+        
+        PropertyValueFactory<Linea, Integer> cantidadProperty
+                = new PropertyValueFactory<Linea, Integer>("cantidad");
+        colCantidad.setCellValueFactory(cantidadProperty);
+        
+        PropertyValueFactory<Linea, Double> precioProperty
+                = new PropertyValueFactory<Linea, Double>("precio");
+        colPrecio.setCellValueFactory(precioProperty);
+    }
+    
+     private void handleButtonAction(MouseEvent event) {
+         colProducto.setText("Arroz");
+
+     }
     
 }
